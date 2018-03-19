@@ -1,0 +1,35 @@
+rails g <name of generator> <options> --no-test-framework
+  --no-test-framework is a flag that tells the generator not to create any tests for the newly-generated models,
+
+types
+  Migrations  create migration file
+  rails g migration add_published_status_to_posts published_status:string --no-test-framework
+  rails g migration remove_published_status_from_posts published_status:string --no-test-framework
+  rails g migration add_post_status_to_posts post_status:boolean --no-test-framework
+  rails g migration change_post_status_data_type_to_posts post_status:string --no-test-framework
+    will make migration file but wont add anything to change method
+    simply add in the change_column method like this: change_column :posts, :post_status, :string
+
+  Models  create migration and model that will inherit from ActiveRecord::Base
+  rails g model Author name:string genre:string bio:text --no-test-framework
+
+  Controllers
+  Controller generators are great if you are creating static views or non-CRUD related features
+  rails g controller admin dashboard stats financials settings --no-test-framework
+    controller admin_controller.rb
+    routes and views: dashboard stats financials and settings
+  ***This is a generator to be careful with – it can create a number of files that are never used  ***
+  controller generators not the best for creating CRUD based features?
+    this would create wasted code since it would create view templates for create, update, and destroy actions,
+    so they would need to be removed immediately.
+
+
+  Resources
+  rails g resource Account name:string payment_status:string --no-test-framework
+    controller accounts_controller
+    model :Account
+    views: views/accounts
+  If you are building an API, using a front end MVC framework, or simply want to manually create your views,
+    the resource generator is a great option for creating the code.
+  The resource generator is a smart generator that creates some of the core functionality needed for a
+    full featured resource without much code bloat.
